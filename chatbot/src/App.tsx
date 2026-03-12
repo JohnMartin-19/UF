@@ -87,28 +87,37 @@ export default function App() {
   const showSuggestions = messages.length === 1;
 
   return (
-    <div className="h-screen bg-white">
+    
+    <div className="relative h-screen w-full bg-white overflow-hidden">
+    {/* Centered Logo from Public Folder */}
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <img 
+        src="/UF-LOGO.png" // Replace with your actual filename (e.g., logo.svg)
+        alt="UniFund Logo" 
+        className="w-64 h-auto opacity-80 " // Adjusted size and made it subtle
+      />
+    </div>
       {/* Chat Toggle Button */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 flex size-14 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-purple-600 text-white shadow-lg transition-transform hover:scale-110"
+          className="fixed bottom-6 right-6 flex size-20 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-blue-300 text-white shadow-lg transition-transform hover:scale-110"
         >
-          <MessageCircle className="size-6" />
+          <MessageCircle className="size-12" />
         </button>
       )}
 
       {/* Chat Interface */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 flex h-[600px] w-[400px] flex-col rounded-2xl bg-white shadow-2xl">
+        <div className="fixed bottom-6 right-6 flex h-[700px] w-[500px] flex-col rounded-2xl bg-white shadow-2xl">
           {/* Header */}
-          <div className="flex items-center justify-between rounded-t-2xl border-b border-gray-200 bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-3">
+          <div className="flex items-center justify-between rounded-t-2xl border-b border-gray-200 bg-gradient-to-r from-blue-600 to-blue-400 px-4 py-3">
             <div className="flex items-center gap-3">
               <div className="flex size-8 items-center justify-center rounded-full bg-white/20">
                 <Sparkles className="size-5 text-white" />
               </div>
               <div>
-                <h2 className="text-sm font-semibold text-white">Study Assistant</h2>
+                <h2 className="text-sm font-semibold text-white">Uni-Q</h2>
                 <p className="text-xs text-white/80">Online</p>
               </div>
             </div>
@@ -167,7 +176,7 @@ export default function App() {
               <button
                 type="submit"
                 disabled={!inputValue.trim() || isTyping}
-                className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-purple-600 text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+                className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-blue-300 text-white transition-opacity hover:opacity-90 disabled:opacity-50"
               >
                 <Send className="size-4" />
               </button>
