@@ -101,7 +101,7 @@ export default function App() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 flex size-20 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-blue-300 text-white shadow-lg transition-transform hover:scale-110"
+          className="fixed bottom-6 right-6 flex size-20 items-center justify-center rounded-full bg-gradient-to-br from-uf-blue to-uf-dark text-white shadow-lg transition-transform hover:scale-110"
         >
           <MessageCircle className="size-12" />
         </button>
@@ -111,10 +111,10 @@ export default function App() {
       {isOpen && (
         <div className="fixed bottom-6 right-6 flex h-[700px] w-[500px] flex-col rounded-2xl bg-white shadow-2xl">
           {/* Header */}
-          <div className="flex items-center justify-between rounded-t-2xl border-b border-gray-200 bg-gradient-to-r from-blue-600 to-blue-400 px-4 py-3">
+          <div className="flex items-center justify-between rounded-t-2xl border-b border-gray-200 bg-gradient-to-r from-uf-blue to-uf-dark px-4 py-4">
             <div className="flex items-center gap-3">
               <div className="flex size-8 items-center justify-center rounded-full bg-white/20">
-                <Sparkles className="size-5 text-white" />
+                <Bot className="size-5 text-white" />
               </div>
               <div>
                 <h2 className="text-sm font-semibold text-white">Uni-Q</h2>
@@ -170,13 +170,13 @@ export default function App() {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Ask me anything..."
-                className="flex-1 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm outline-none transition-shadow placeholder:text-gray-400 focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
+                className="flex-1 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm outline-none transition-shadow placeholder:text-gray-400 focus:border-uf-dark focus:ring-2 focus:ring-uf-blue"
                 disabled={isTyping}
               />
               <button
                 type="submit"
                 disabled={!inputValue.trim() || isTyping}
-                className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-blue-300 text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+                className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-uf-blue to-uf-dark text-white transition-opacity hover:opacity-90 disabled:opacity-50"
               >
                 <Send className="size-4" />
               </button>

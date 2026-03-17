@@ -18,7 +18,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
     <div className={`flex gap-3 ${isUser ? "flex-row-reverse" : "flex-row"}`}>
       <div
         className={`flex size-8 shrink-0 items-center justify-center rounded-full ${
-          isUser ? "bg-blue-600" : "bg-purple-600"
+          isUser ? "bg-blue-600" : "bg-uf-dark"
         }`}
       >
         {isUser ? (
