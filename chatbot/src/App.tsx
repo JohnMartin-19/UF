@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, Sparkles, MessageCircle, X, Bot } from "lucide-react";
+import { Send, MessageCircle,MessagesSquare, X, Bot } from "lucide-react";
 import { ChatMessage, type Message } from "./app/components/ChatMessage";
 import { SuggestedPrompts } from "./app/components/SuggestedPrompts";
 
@@ -103,7 +103,7 @@ export default function App() {
           onClick={() => setIsOpen(true)}
           className="fixed bottom-6 right-6 flex size-20 items-center justify-center rounded-full bg-gradient-to-br from-uf-blue to-uf-dark text-white shadow-lg transition-transform hover:scale-110"
         >
-          <MessageCircle className="size-12" />
+          <MessagesSquare className="size-12" />
         </button>
       )}
 
