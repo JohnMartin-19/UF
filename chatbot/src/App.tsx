@@ -8,7 +8,7 @@ export default function App() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      content: "Hi! I'm your university study assistant. I can help you understand concepts, create study schedules, prepare for exams, and more. How can I help you today?",
+      content: "Hi! I'm your Universities Fund assistant. I can help you understand concepts related to the Higher Education Funding Model. How can I help you today?",
       role: "assistant",
       timestamp: new Date(),
     },

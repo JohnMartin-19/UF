@@ -1,57 +1,53 @@
 import os
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from anthropic import AnthropicFoundry  # Updated Import
+from openai import OpenAI  # Use OpenAI client for local Ollama compatibility
 from dotenv import load_dotenv
 
 load_dotenv()
 
-app = FastAPI(title="UniFund AI Chatbot Backend")
+app = FastAPI(title="UniFund AI Chatbot Prototype")
 
-# Initialize Azure Client
-# This aligns with Phase 2: RAG & AI development [cite: 23]
-client = AnthropicFoundry(
-    azure_api_key=os.getenv("AZURE_AI_FOUNDRY_KEY"),
-    azure_ad_token_provider=None, # Use this if using Managed Identity
-    api_version="2024-06-01",
-    azure_endpoint=os.getenv("AZURE_AI_FOUNDRY_ENDPOINT")
+# Initialize Local Client (Ollama)
+# When you migrate to the cloud, you'll only need to change this base_url and the API key.
+client = OpenAI(
+    base_url="http://localhost:11434/v1",
+    api_key="ollama",  # Required but ignored by local Ollama
 )
 
-def main():
-    return('Unis Fund Backend')
 class ChatRequest(BaseModel):
     message: str
     student_id: str | None = None
 
 @app.get("/")
 def health_check():
-    return {"status": "online", "model": "Claude 3.5 Sonnet on Azure AI Foundry"}
+    return {"status": "online", "model": "Llama 3 (Local via Ollama)"}
 
 @app.post("/chat")
 async def chat_endpoint(request: ChatRequest):
     try:
-        # Persona: Helpful, Official, and Authoritative [cite: 21]
         system_prompt = (
-            "You are the Universities Fund AI Assistant. Your tone is helpful, official, and authoritative[cite: 21]. "
+            "You are the Universities Fund AI Assistant. Your tone is helpful, official, and authoritative. "
             "You provide accurate information regarding the New Higher Education Funding Model, "
-            "scholarship bands, and institutional funding[cite: 4]. "
-            "Always cite sources such as Circulars or Acts of Parliament[cite: 27]."
+            "scholarship bands, and institutional funding. "
+            "Always cite sources such as Circulars or Acts of Parliament."
         )
 
-        response = client.messages.create(
-            model="claude-3-5-sonnet", 
-            max_tokens=1024,
-            system=system_prompt,
+        # Using the standard Chat Completion format
+        response = client.chat.completions.create(
+            model="llama3", 
             messages=[
+                {"role": "system", "content": system_prompt},
                 {"role": "user", "content": request.message}
-            ]
+            ],
+            max_tokens=1024,
         )
         
-        return {"response": response.content[0].text}
+        return {"response": response.choices[0].message.content}
     
     except Exception as e:
-        # Error handling for Phase 4: Testing & Accuracy [cite: 35]
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
-    main()
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
